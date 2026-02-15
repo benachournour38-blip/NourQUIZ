@@ -20,16 +20,16 @@ const Index: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row gap-4">
         <QuizButton variant="start" onClick={() => navigate('/host')}>
-          🎮 Héberger un Quiz
+          🎮 Host a Quiz
         </QuizButton>
         <button
           onClick={() => {
-            const pin = prompt('Entrez le code PIN du quiz :');
+            const pin = prompt('Enter the quiz PIN:');
             if (pin) navigate(`/join?pin=${pin.replace(/\s/g, '')}`);
           }}
           className="bg-white/20 backdrop-blur border-2 border-white/30 text-foreground font-black text-2xl py-5 px-16 rounded-full hover:bg-white/30 transition-all cursor-pointer uppercase"
         >
-          🔑 Rejoindre
+          🔑 Join
         </button>
       </div>
     </div>

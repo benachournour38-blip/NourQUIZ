@@ -90,23 +90,23 @@ const HostPage: React.FC = () => {
                 onClick={handleCopy}
                 className="flex items-center gap-2 px-5 py-2 rounded-lg text-foreground/70 hover:bg-white/10 hover:text-foreground transition-all"
               >
-                {copied ? '✓ Copié!' : '📋 Copier'}
+                {copied ? '✓ Copied!' : '📋 Copy'}
               </button>
               <button
                 onClick={handleRegenerate}
                 className="flex items-center gap-2 px-5 py-2 rounded-lg text-foreground/70 hover:bg-white/10 hover:text-foreground transition-all"
               >
-                🔄 Régénérer
+                🔄 Regenerate
               </button>
             </div>
           </div>
 
           <div className="text-center mt-4">
-            <p className="text-3xl font-bold mb-4">En attente de joueurs...</p>
-            <p className="text-lg opacity-80">👤 Ou rejoindre sur cet appareil</p>
+            <p className="text-3xl font-bold mb-4">Waiting for players...</p>
+            <p className="text-lg opacity-80">👤 Or join on this device</p>
             <div className="mt-8">
               <QuizButton variant="start" onClick={goToLobby}>
-                Aller au Lobby
+                Go to Lobby
               </QuizButton>
             </div>
           </div>
@@ -124,19 +124,19 @@ const HostPage: React.FC = () => {
             </div>
             <div className="space-y-2 text-base">
               <div className="flex items-center gap-3">📊 <strong>{QUIZ_QUESTIONS.length}</strong> questions</div>
-              <div className="flex items-center gap-3">⏱️ <strong>15s</strong> par question</div>
-              <div className="flex items-center gap-3">🌍 Anglais</div>
+              <div className="flex items-center gap-3">⏱️ <strong>15s</strong> per question</div>
+              <div className="flex items-center gap-3">🌍 English</div>
             </div>
           </div>
 
           {/* Settings */}
           <div className="bg-black/25 rounded-2xl p-6">
-            <h3 className="text-2xl font-bold mb-6">Paramètres</h3>
+            <h3 className="text-2xl font-bold mb-6">Settings</h3>
             <h4 className="text-lg font-semibold mb-4">Gameplay</h4>
             <div className="space-y-1">
-              <SettingItem label="Mode équipe" description="Tous les joueurs en équipes" badge="NEW" />
-              <SettingItem label="Cacher le classement" description="Cacher pendant le jeu" />
-              <SettingItem label="Timer" description="15 secondes par question" defaultChecked />
+              <SettingItem label="Team mode" description="All players in teams" badge="NEW" />
+              <SettingItem label="Hide leaderboard" description="Hide during game" />
+              <SettingItem label="Timer" description="15 seconds per question" defaultChecked />
             </div>
           </div>
         </div>

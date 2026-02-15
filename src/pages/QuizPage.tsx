@@ -29,28 +29,10 @@ const QuizPage: React.FC = () => {
   const prevSection = currentQ > 0 ? QUIZ_QUESTIONS[currentQ - 1].section : '';
   const isNewSection = question.section !== prevSection;
 
-  const handleAnswer = useCallback((idx: number) => {
-    if (selected !== null || showResult) return;
-    setSelected(idx);
-    setShowResult(true);
-    // Score: A=0, B=1, C=2, D=3
-    setTotalScore((s) => s + idx);
-    setAnsweredCount((c) => c + 1);
-  }, [selected, showResult]);
+  // Auto-advance to next question after answer with short delay
+  const AUTO_ADVANCE_DELAY = 750; // ms
 
-  // Timer
-  useEffect(() => {
-    if (showResult || gameOver) return;
-    if (timeLeft <= 0) {
-      // Time out = no answer, move on (no points added)
-      setShowResult(true);
-      return;
-    }
-    const t = setTimeout(() => setTimeLeft((v) => v - 1), 1000);
-    return () => clearTimeout(t);
-  }, [timeLeft, showResult, gameOver]);
-
-  const nextQuestion = () => {
+  const nextQuestion = React.useCallback(() => {
     if (currentQ + 1 >= QUIZ_QUESTIONS.length) {
       setGameOver(true);
       const playerData = JSON.parse(localStorage.getItem('playerData') || '{}');
@@ -62,7 +44,34 @@ const QuizPage: React.FC = () => {
     setSelected(null);
     setShowResult(false);
     setTimeLeft(15);
-  };
+  }, [currentQ, totalScore]);
+
+  const handleAnswer = useCallback((idx: number) => {
+    if (selected !== null || showResult) return;
+    setSelected(idx);
+    setShowResult(true);
+    setTotalScore((s) => s + idx);
+    setAnsweredCount((c) => c + 1);
+
+    // Auto-advance logic
+    setTimeout(() => {
+      nextQuestion();
+    }, AUTO_ADVANCE_DELAY);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, showResult, nextQuestion]);
+
+  // Timer
+  useEffect(() => {
+    if (showResult || gameOver) return;
+    if (timeLeft <= 0) {
+      // Time out = no answer, move on (no points added)
+      setShowResult(true);
+      setTimeout(() => nextQuestion(), AUTO_ADVANCE_DELAY);
+      return;
+    }
+    const t = setTimeout(() => setTimeLeft((v) => v - 1), 1000);
+    return () => clearTimeout(t);
+  }, [timeLeft, showResult, gameOver, nextQuestion]);
 
   const goHome = () => {
     localStorage.removeItem('quizStarted_' + pin);
@@ -202,7 +211,7 @@ const QuizPage: React.FC = () => {
           })}
         </div>
 
-        {/* Next button */}
+        {/* No Next button/UI here, auto-advance only */}
         {showResult && (
           <div className="text-center mt-8 animate-slide-in">
             <div className="mb-4 text-lg font-bold">
@@ -212,12 +221,6 @@ const QuizPage: React.FC = () => {
                 <span className="text-nour-yellow">⏰ Time's up! No answer recorded.</span>
               )}
             </div>
-            <button
-              onClick={nextQuestion}
-              className="bg-gradient-to-b from-primary to-nour-lime-dark text-primary-foreground font-black text-xl py-4 px-12 rounded-full shadow-[var(--shadow-btn-start)] hover:translate-y-[-3px] hover:shadow-[var(--shadow-btn-start-hover)] active:translate-y-[5px] active:shadow-[var(--shadow-btn-start-active)] transition-all cursor-pointer"
-            >
-              {currentQ + 1 < QUIZ_QUESTIONS.length ? 'Next Question →' : 'See Results'}
-            </button>
           </div>
         )}
       </main>

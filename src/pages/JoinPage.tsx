@@ -25,11 +25,11 @@ const JoinPage: React.FC = () => {
 
   const joinGame = () => {
     if (!nickname.trim()) {
-      setError('Veuillez entrer un nom !');
+      setError('Please enter a name!');
       return;
     }
     if (nickname.trim().length < 2) {
-      setError('Le nom doit avoir au moins 2 caractères !');
+      setError('Name must be at least 2 characters!');
       return;
     }
 
@@ -73,7 +73,7 @@ const JoinPage: React.FC = () => {
             value={nickname}
             onChange={(e) => { setNickname(e.target.value); setError(''); }}
             onKeyDown={(e) => e.key === 'Enter' && joinGame()}
-            placeholder="Entrez votre nom..."
+            placeholder="Enter your name..."
             maxLength={20}
             className="w-full bg-white/95 text-nour-teal-dark border-4 border-nour-teal-dark rounded-2xl px-5 py-4 text-xl font-semibold text-center outline-none focus:bg-white focus:scale-[1.02] transition-all placeholder:text-nour-teal/50"
           />
@@ -82,7 +82,7 @@ const JoinPage: React.FC = () => {
 
         {/* Avatar section */}
         <div className="mb-8">
-          <p className="text-lg mb-4 opacity-90">Choisis ton personnage :</p>
+          <p className="text-lg mb-4 opacity-90">Choose your character:</p>
           <div
             onClick={randomAvatar}
             className="w-36 h-36 mx-auto bg-white/10 border-4 border-white/30 rounded-full flex items-center justify-center text-7xl animate-bounce-gentle cursor-pointer hover:scale-110 hover:border-nour-lime transition-all"
@@ -109,10 +109,10 @@ const JoinPage: React.FC = () => {
         {/* Action buttons */}
         <div className="flex gap-4">
           <QuizButton variant="clear" onClick={clearForm} className="flex-1">
-            Effacer
+            Clear
           </QuizButton>
           <QuizButton variant="done" onClick={joinGame} className="flex-1">
-            Rejoindre
+            Join
           </QuizButton>
         </div>
       </div>

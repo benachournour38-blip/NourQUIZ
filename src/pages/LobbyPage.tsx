@@ -63,7 +63,7 @@ const LobbyPage: React.FC = () => {
         {/* Players */}
         <div className="bg-black/25 rounded-3xl p-8 flex flex-col overflow-hidden">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-black">🎮 Joueurs</h2>
+            <h2 className="text-3xl font-black">🎮 Players</h2>
             <div className="bg-white/20 px-6 py-2 rounded-full text-2xl font-bold">{players.length}</div>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 overflow-y-auto flex-1 pr-2">
@@ -81,7 +81,7 @@ const LobbyPage: React.FC = () => {
             ))}
             {players.length === 0 && (
               <div className="col-span-full text-center py-20 opacity-60 text-xl">
-                Aucun joueur pour le moment...
+                No players yet...
               </div>
             )}
           </div>
@@ -94,13 +94,13 @@ const LobbyPage: React.FC = () => {
               🧠
             </div>
             <h3 className="text-2xl font-black mb-2">Brain Rot Quiz</h3>
-            <p className="opacity-80">{QUIZ_QUESTIONS.length} questions • 15s par question</p>
+            <p className="opacity-80">{QUIZ_QUESTIONS.length} questions • 15s per question</p>
           </div>
 
           <div className="bg-black/25 rounded-3xl p-8 text-center">
             <div className="text-5xl mb-3 animate-spin" style={{ animationDuration: '3s' }}>⏳</div>
-            <p className="text-2xl font-bold mb-2">En attente de joueurs...</p>
-            <p className="opacity-70">Rejoignez sur NourQUIZ.com</p>
+            <p className="text-2xl font-bold mb-2">Waiting for players...</p>
+            <p className="opacity-70">Join at NourQUIZ.com</p>
           </div>
 
           {isAdmin && (
@@ -112,10 +112,12 @@ const LobbyPage: React.FC = () => {
                 disabled={players.length === 0}
                 className="w-full"
               >
-                Lancer le Quiz
+                Start the Quiz
               </QuizButton>
               <p className="mt-4 opacity-60">
-                {players.length === 0 ? 'En attente de joueurs...' : `${players.length} joueur${players.length > 1 ? 's' : ''} prêt${players.length > 1 ? 's' : ''} !`}
+                {players.length === 0
+                  ? 'Waiting for players...'
+                  : `${players.length} player${players.length > 1 ? 's' : ''} ready!`}
               </p>
             </div>
           )}
