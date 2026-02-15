@@ -15,7 +15,7 @@ const Index: React.FC = () => {
         <NourLogo size="lg" />
       </div>
       <p className="text-xl opacity-80 mb-12 max-w-md">
-        Créez et jouez à des quiz interactifs avec vos amis en temps réel !
+        Test your digital wellness and discover your brain rot level!
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4">
